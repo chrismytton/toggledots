@@ -1,0 +1,60 @@
+#!/usr/bin/env ruby
+require 'optparse'
+
+module ToggleDots
+  class << self
+    def run
+      # Parse the command line options
+      @options = {}
+      OptionParser.new do |opts|
+        opts.banner = 'Usage: toggledots [options]'
+        opts.on('-v', '--[no-]verbose', "Run Verbosely") do |v|
+          @options[:verbose] = v
+        end
+        opts.on_tail('-h', '--help', 'Show this message') do
+          puts opts
+          exit
+        end
+      end.parse!
+      toggle
+    end
+    
+    def toggle
+      # Check what state the (com.apple.finder, AppleShowAllFiles) setting is in
+      case current_state
+      when ""
+        puts 'Adding domain/default pair (com.apple.finder, AppleShowAllFiles)'
+        show_hidden
+      when "FALSE"
+        show_hidden
+      when "TRUE"
+        hide_hidden
+      end
+      restart_finder
+    end
+
+    def current_state
+      `defaults read com.apple.finder AppleShowAllFiles`.chomp
+    end
+
+    def show_hidden
+      `defaults write com.apple.finder AppleShowAllFiles TRUE`
+      message :shown
+    end
+
+    def hide_hidden
+      `defaults write com.apple.finder AppleShowAllFiles FALSE`
+      message :hidden
+    end
+    
+    def message state
+      puts "Dot files are now #{state} in Finder" if @options[:verbose]
+    end
+
+    def restart_finder
+      `killall Finder`
+    end
+  end
+end
+
+ToggleDots.run
