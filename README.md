@@ -3,12 +3,12 @@
 toggledots - show and hide hidden files in OS X's Finder
 ==========
 
-DESCRIPTION
+Description
 -----------
 
 toggledots is a very simple ruby script for toggling the visibility of your "dot-files" in Finder.
 
-INSTALL
+Install
 -------
 
 To install toggle dots the easiest thing to do is clone this repository and use rake to install:
@@ -18,7 +18,7 @@ To install toggle dots the easiest thing to do is clone this repository and use 
 	$ [sudo] rake install
 	$ toggledots --help
 	
-By default the rake task will try and install into /usr/local, use sudo if you need to. To configure the prefix add it as an argument to the rake task:
+By default the rake task will try and install into /usr/local, so use sudo if you need to. To configure the prefix add it as an argument to the rake task:
 
 	# Install to home directory
 	$ [sudo] rake install[~]
@@ -26,12 +26,33 @@ By default the rake task will try and install into /usr/local, use sudo if you n
 	
 This will attempt to install to your home directory (`~`) in the `bin` folder (`~/bin/toggledots`), but will fail if there is no bin directory in the prefix provided.
 
-ABOUT
+Usage
 -----
 
-This was originally written as I'm too lazy to remember the command to change the visibility of hidden files in Finder (`defaults write com.apple.finder AppleShowAllFiles [TRUE|FALSE]` if you're interested), If you want to make any changes/improvements please feel free to fork this repository, if you have spotted a bug then file an issue here on Github.
+Once installed you can change the visibility of the dot-files by simply running `toggledots`
 
-LICENCE
+	$ toggledots
+	(Hidden files will now be shown in Finder)
+	
+For (a tiny bit) more help use the `--help` flag, to get more information use the `--verbose` flag:
+
+	$ toggledots --help
+	Usage: toggledots [options]
+	    -v, --[no-]verbose               Run Verbosely
+	    -h, --help                       Show this message
+	$ toggledots --verbose
+	Dot files are now shown in Finder
+	$ toggledots --verbose
+	Dot files are now hidden in Finder
+
+**Note**: After each action that toggledots performs it will restart Finder with `killall Finder`.
+
+About
+-----
+
+This was originally written as I'm too lazy to remember the (overly verbose) command to change the visibility of hidden files in Finder (`defaults write com.apple.finder AppleShowAllFiles [TRUE|FALSE]` if you're interested). If you want to make any changes/improvements please feel free to fork this repository, if you have spotted a bug then file an issue here on Github.
+
+Licence
 -------
 
 The MIT License
