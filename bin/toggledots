@@ -18,7 +18,7 @@ module ToggleDots
       end.parse!
       toggle
     end
-    
+
     def toggle
       # Check what state the (com.apple.finder, AppleShowAllFiles) setting is in
       case current_state
@@ -46,7 +46,7 @@ module ToggleDots
       `defaults write com.apple.finder AppleShowAllFiles FALSE`
       message :hidden
     end
-    
+
     def message state
       puts "Dot files are now #{state} in Finder" if @options[:verbose]
     end
