@@ -1,3 +1,5 @@
+**Update June 2020**: I created this gem when I was learning Ruby back in 2010. A whole decade ago! I doubt anyone is actually using this, since it is a bit of an overkill for something that can just be a shell alias. But it was a good learning exercise, so I'm leaving it up for posterity.
+
 toggledots
 ==========
 
